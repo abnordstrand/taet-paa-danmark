@@ -1,0 +1,541 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: normal;
+    --font-black: #202322;
+    --font-white: #fff;
+    --font-lightgrey: #F7F7F7;
+    --font-grey: #808080;
+    --bg-white: #fff;
+    --off-white: #FAF8F2;
+    --accent-red: #C92A2A;
+    --accent-yellow: #F2C94C;
+    --accent-green: #234638;
+    --border-grey: #CCCCCC;
+}
+
+.display-font {
+    font-family: "Playfair Display", serif;
+    font-style: italic;
+    font-weight: normal;
+}
+
+/* HEADER */
+
+header {
+    margin: 2em;
+    padding: 2em;
+    align-content: center;
+    position: absolute;
+    top: 0;
+    width: calc(100% - 4em);
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    column-gap: 0;
+}
+
+header .logo a {
+    color: var(--font-white);
+    font-size: 1.8em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header .logo a:hover {
+    opacity: 0.8;
+}
+
+header nav ul {
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header nav ul li {
+    display: inline-block;
+    margin: 0 1.5em;
+}
+
+header nav ul li a {
+    color: var(--font-lightgrey);
+    text-decoration: 0;
+}
+
+header nav ul li a:hover {
+    border-bottom: 1px solid var(--font-white);
+}
+
+header nav ul li.active a {
+    color: var(--font-white);
+    font-weight: bold;
+}
+
+header .header-ikoner {
+    text-align: end;
+}
+
+header .header-ikoner a {
+    text-decoration: 0;
+}
+
+header .header-ikoner svg {
+    color: var(--font-white);
+    height: 1.6em;
+    width: auto;
+    margin-left: 20px;
+}
+
+header .header-ikoner svg:hover {
+    opacity: 0.8;
+}
+
+/* HERO M. BILLEDE */
+
+.hero {
+    min-height: 75vh;
+    margin: 2em;
+    border-radius: 25px;
+    align-content: center;
+    justify-items: center;
+    color: var(--font-white);
+    text-align: center;
+}
+
+.hero.bg-img-1 {
+    background: url(/img/forside-hero.jpg) rgb(0,0,0,0.2);
+    background-blend-mode: overlay;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.hero h1 {
+    margin-bottom: 40px;
+    font-weight: bold;
+    font-size: 2.5em;
+}
+
+.hero .searchbar {
+    background-color: var(--bg-white);
+    min-width: 42vw;
+    border: 0;
+    border-radius: 50px;
+    align-content: center;
+    padding: 8px;
+}
+
+
+.hero .searchbar fieldset {
+    display: inline-block;
+    border: 0;
+    border-right: 1px solid var(--font-grey);
+    width: 30%;
+}
+
+.hero .searchbar fieldset:nth-child(3) {
+    border: 0;
+}
+
+.hero .searchbar label {
+    display: block;
+    color: var(--font-black);
+    font-size: 0.9em;
+    text-align: left;
+}
+
+.hero .searchbar input {
+    border: 0;
+    width: 100%;
+}
+
+.hero .searchbar input:focus {
+    outline: none;
+}
+
+
+.hero .searchbar button {
+    float: right;
+    height: 4em;
+    width: 4em;
+    background-color: var(--accent-red);
+    color: var(--font-white);
+    border: 0;
+    border-radius: 50%;
+}
+
+.hero .searchbar button:hover {
+    cursor: pointer;
+}
+
+/* POPULÆRE DESTINATIONER FORSIDE */
+
+.poplaere-destinationer {
+    margin: 2em;
+    padding: 60px 0;
+}
+
+.poplaere-destinationer h2 {
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.poplaere-destinationer .card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5em;
+}
+
+.poplaere-destinationer .card-container .card {
+    background-color: var(--off-white);
+    aspect-ratio: 16/9;
+    align-content: end;
+    border-radius: 25px;
+    padding: 1.5em;
+    font-size: 1.5em;
+    transition: ease-in-out 150ms;
+}
+
+.poplaere-destinationer .card-container .card:hover {
+    transform: translateY(-5px);
+    transition: ease-in-out 150ms;
+}
+
+.poplaere-destinationer .card.bg-aarhus {
+    background: url(/img/populaer-aarhus.jpg), linear-gradient(#00000000, #000000a0);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.poplaere-destinationer .card.bg-bornholm {
+    background: url(/img/populaer-bornholm.jpg), linear-gradient(#00000000, #000000a0);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.poplaere-destinationer .card.bg-aalborg {
+    background: url(/img/populaer-aalborg.jpg), linear-gradient(#00000000, #000000a0);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.poplaere-destinationer .card h3 {
+    color: var(--font-white);
+    text-decoration: none;
+    float: left;
+    font-size: 1em;
+}
+
+.poplaere-destinationer .card svg {
+    float: right;
+    color: var(--font-white);
+    height: 1em;
+    width: auto;
+}
+
+/* DESTINATIONER KATALOG */
+
+.destinationer {
+    margin: 2em;
+    padding: 60px 0;
+}
+
+.destinationer h2 {
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.destinationer .card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5em;
+}
+
+.destinationer .card .top {
+    overflow: hidden;
+    border-radius: 25px 25px 0 0;
+}
+
+.destinationer .card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    object-position: center;
+    margin-top: -3em;
+    transition: ease-in-out 300ms;
+}
+
+.destinationer .card img:hover {
+    transform: scale(108%);
+    transition: ease-in-out 300ms;
+}
+
+.destinationer .card .favorit {
+    position: relative;
+    background-color: var(--bg-white);
+    aspect-ratio: 1/1;
+    height: 3em;
+    float: right;
+    top: 25px;
+    right: 25px;
+    border-radius: 50%;
+    align-content: center;
+    text-align: center;
+    z-index: 1;
+}
+
+.destinationer .card .favorit svg {
+    height: 1em;
+    width: auto;
+    font-size: 1.5em;
+    margin-top: 6px;
+    color: var(--font-black);
+}
+
+.destinationer .card .bottom {
+    position: relative;
+    top: -4px;
+    background-color: var(--off-white);
+    min-height: 8em;
+    align-content: start;
+    border-radius: 0 0 25px 25px;
+    padding: 1.5em;
+}
+
+.destinationer .card-container .card .bottom a {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--font-black);
+}
+
+.destinationer .card-container .card .bottom p {
+    color: var(--font-grey);
+}
+
+.destinationer .card-container .card .bottom p:first-of-type {
+    margin-top: 8px;
+}
+
+.destinationer .card .anmeldelse-stjerner {
+    align-content: center;
+}
+
+.destinationer .card .anmeldelse-stjerner .stjerner-tal {
+    display: inline-block;
+    font-size: 1em;
+}
+
+.destinationer .card .anmeldelse-stjerner .stjerner {
+    position: relative;
+    bottom: -2px;
+    display: inline-block;
+    height: 1em;
+    margin-left: 5px;
+}
+
+.destinationer .card .anmeldelse-stjerner .stjerner svg.fuld-farve {
+    width: auto;
+    color: var(--accent-yellow);
+}
+
+.destinationer .card .anmeldelse-stjerner .stjerner svg.ingen-farve {
+    width: auto;
+    color: var(--border-grey);
+}
+
+
+/* NYHEDSBREV */
+.nyhedsbrev {
+    min-height: 75vh;
+    margin: 3em 2em 8em 2em;
+    border-radius: 25px;
+    align-content: center;
+    justify-items: center;
+    color: var(--font-white);
+    text-align: center;
+    background: url(/img/nyhedsbrev-img.jpg), rgb(35, 70, 56, 0.4);
+    background-blend-mode: overlay;
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.nyhedsbrev h2 {
+    font-size: 3em;
+    font-weight: 600;
+    margin-bottom: 35px;
+}
+
+.nyhedsbrev h4 {
+    text-transform: uppercase;
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-bottom: 12px;
+}
+
+.nyhedsbrev fieldset {
+    border: 1px solid var(--font-white);
+    border-radius: 100px;
+    min-width: 45%;
+}
+
+.nyhedsbrev fieldset input {
+    background-color: transparent;
+    color: var(--font-white);
+    border: 0;
+    width: 80%;
+}
+
+.nyhedsbrev fieldset input::placeholder {
+    color: #e3e3e3;
+}
+
+.nyhedsbrev fieldset input:focus {
+    outline: none;
+}
+
+.nyhedsbrev fieldset button {
+    background-color: transparent;
+    color: var(--font-white);
+    border: 0;
+    border-left: 1px solid #fff;
+    padding: 0.5em 1.5em;
+    width: 10%;
+}
+
+.nyhedsbrev fieldset button:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* ********************************* */
+/* SKRIV NOGET MERE STYLING LIGE HER */
+/* ********************************* */
+
+
+
+
+
+
+/* FOOTER */
+
+footer {
+    background-color: var(--accent-green);
+    color: var(--off-white);
+}
+
+footer .footer-bg {
+    width: 100%;
+    object-fit: cover;
+    object-position: top;
+    max-height: 35em;
+    z-index: -1;
+}
+
+.footer-columns {
+    padding: 6em 2em;
+    display: grid;
+    grid-template-columns: 30% repeat(3, 1fr);
+    gap: 4em;
+}
+
+.footer-columns .column {
+    display: inline-block;
+}
+
+.footer-columns .logo a {
+    color: var(--off-white);
+    font-size: 1.8em;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer-columns .logo a:hover {
+    opacity: 0.8;
+}
+
+.footer-columns h3.slogan {
+    font-size: 1.375em;
+    margin: 20px 0 20px 0;
+}
+
+.footer-columns h4 {
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.footer-columns ul {
+    list-style: none;
+    padding: 0;
+    line-height: 2.5em;
+}
+
+.footer-columns ul li a {
+    color: var(--off-white);
+    text-decoration: 0;
+}
+
+.footer-columns ul li a:hover {
+    border-bottom: 1px solid var(--off-white);
+}
+
+.footer-columns .adresse {
+    color: var(--border-grey);
+}
+
+.footer-columns .adresse.bold {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.footer-columns .sociale-medier {
+    margin-top: 30px;
+}
+
+.footer-columns .sociale-medier a {
+    color: var(--off-white);
+    text-decoration: none;
+    padding-right: 1.8em;
+}
+
+.footer-columns .sociale-medier a svg {
+    height: 1.5em;
+    width: 1.5em;
+}
+
+/* COPYRIGHT COLUMNS */
+
+.copyright-columns {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1em 2em;
+    color: var(--off-white);
+}
+
+.copyright-columns .column:last-of-type {
+    text-align: end;
+    color: var(--font-grey);
+}
+
+.copyright-columns .column a {
+    color: var(--off-white);
+    text-decoration: none;
+}
+
+.copyright-columns .column a:hover {
+    border-bottom: 1px solid var(--off-white);
+}
+
+.copyright-columns .column span.seperator {
+    padding: 0 1em;
+}
