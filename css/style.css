@@ -15,6 +15,7 @@
     --accent-yellow: #F2C94C;
     --accent-green: #234638;
     --border-grey: #CCCCCC;
+    scroll-behavior: smooth;
 }
 
 p, a, span {
@@ -50,7 +51,7 @@ header {
     width: calc(100% - 4em);
     background-color: transparent;
     display: grid;
-    grid-template-columns: 20% 60% 20%;
+    grid-template-columns: 30% 40% 30%;
     column-gap: 0;
     z-index: 99;
 }
@@ -146,30 +147,42 @@ header .header-ikoner svg:hover {
     opacity: 0.8;
 }
 
-header.sekundaer fieldset {
+header fieldset {
     display: inline;
     border-radius: 100px;
+    border: 1px solid var(--font-white);
+}
+
+header fieldset input {
+    border: 0;
+    background-color: transparent;
+    font-size: 1em;
+    color: var(--font-white);
+}
+
+header fieldset input::placeholder {
+    color: var(--border-grey);
+}
+
+header.sekundaer fieldset {
     border: 1px solid var(--font-black);
 }
 
 header.sekundaer fieldset input {
-    border: 0;
-    background-color: transparent;
-    font-size: 1em;
     color: var(--font-black);
 }
 
-header.sekundaer fieldset input:focus {
+header fieldset input:focus {
     outline: none;
 }
 
-header.sekundaer fieldset button {
+header fieldset button {
     border: 0;
     background-color: transparent;
     margin-top: 2px;
 }
 
-header.sekundaer fieldset button:hover {
+header fieldset button:hover {
     cursor: pointer;
 }
 
@@ -840,7 +853,7 @@ section.destination-top {
 }
 
 .destination-info h2 {
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 70px;
     font-size: 2em;
 }
@@ -972,7 +985,7 @@ section.destination-top {
 }
 
 .destination-anmeldelser .titel h2 {
-    font-weight: bold;
+    font-weight: 600;
    /*  margin-top: 70px; */
     font-size: 2em;
     display: inline;
@@ -1045,6 +1058,231 @@ section.destination-top {
 
 .destinationer.oplevelser h2 {
     font-size: 2em;
-    font-weight: 700;
+    font-weight: 600;
+}
+
+/* OM OS SIDE */
+
+.hero.om-os { /* .HERO LÆNGERE OPPE I STYLE SHEETET FORTÆLLER HVORDAN EN .HERO CLASS SKAL SE UD. HER GIVES KUN BAGGRUNDSBILLEDE */
+    background: url(/img/om-os-hero.jpg) rgb(0,0,0,0.6);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.hero.om-os h1 {
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.hero.om-os h3 {
+    margin-top: 60px;
+}
+
+.hero .ikoner-columns {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px
+}
+
+.hero .ikoner-columns a.column {
+    color: var(--font-white);
+    text-decoration: none;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.hero .ikoner-columns .column .cirkel {
+    width: 6em;
+    aspect-ratio: 1/1;
+    border: 3px solid var(--font-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero .ikoner-columns .column .cirkel svg {
+    height: 2.5em;
+    width: 2.5em;
+}
+
+.om-os-info .columns {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    padding: 60px 0;
+}
+
+.om-os-info img {
+    width: 100%;
+    border-radius: 25px;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
+.om-os-info h2 {
+    font-size: 2em;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.om-os-info p {
+    margin-top: 20px;
+}
+
+/* FORDELE SEKTION PÅ OM OS SIDE */
+
+.fordele {
+    padding-bottom: 60px;
+}
+
+.fordele .ikoner-columns {
+    width: 70%;
+    justify-self: center;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px
+}
+
+.fordele .ikoner-columns .column {
+    color: var(--font-black);
+    text-decoration: none;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fordele .ikoner-columns .column .cirkel {
+    width: 7em;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--border-grey);
+    background-color: var(--off-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fordele .ikoner-columns .column .cirkel svg {
+    height: 2.5em;
+    width: 2.5em;
+}
+
+.fordele .ikoner-columns .column h4 {
+    font-size: 1.25em;
+    font-weight: 600;
+    margin-top: 12px;
+}
+
+.fordele .ikoner-columns .column p {
+    text-align: center;
+    font-size: 1em;
+    color: var(--font-grey);
+}
+
+.fordele #blad-ikon {
+    transform: scaleX(-1);
+}
+
+/* TIDSLINJE */
+
+.tidslinje .tidslinje-card {
+    background-color: var(--off-white);
+    border-radius: 25px;
+    margin-bottom: 60px;
+}
+
+.tidslinje h2 {
+    text-align: center;
+    font-size: 2em;
+    font-weight: 600;
+    padding-top: 40px;
+}
+
+.tidslinje img {
+    width: 100%;
+}
+
+
+/* STOR BILLEDE SEKTION PÅ OM OS SIDE */
+.stor-billede img {
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+    object-position: center 65%;
+    border-radius: 25px;
+}
+
+/* VORES VÆRDIER SEKTION PÅ OM OS SIDE */
+/* MEGET ER DET SAMME (KOPIERET FRA .FORDELE SEKTIONEN OG .HERO.OM-OS */
+
+.vores-vaerdier {
+    padding: 80px 0;
+}
+
+.vores-vaerdier h2 {
+   font-weight: 600;
+   text-align: center;
+   font-size: 2.5em;
+}
+
+.vores-vaerdier .ikoner-columns {
+    width: 80%;
+    justify-self: center;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px
+}
+
+.vores-vaerdier .ikoner-columns .column {
+    color: var(--font-black);
+    text-decoration: none;
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: var(--off-white);
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.vores-vaerdier .ikoner-columns .column .cirkel {
+    width: 7em;
+    aspect-ratio: 1/1;
+    border: 2px solid var(--font-black);
+    background-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vores-vaerdier .ikoner-columns .column .cirkel svg {
+    height: 2.5em;
+    width: 2.5em;
+}
+
+.vores-vaerdier .ikoner-columns .column h4 {
+    font-size: 1.25em;
+    font-weight: 600;
+    margin-top: 16px;
+}
+
+.vores-vaerdier .ikoner-columns .column p {
+    text-align: start;
+    font-size: 1.125em;
+    color: var(--font-grey);
+}
+
+.vores-vaerdier #handtryk-ikon {
+    height: 3em;
+    width: 3em;
 }
 
