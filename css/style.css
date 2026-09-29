@@ -17,10 +17,26 @@
     --border-grey: #CCCCCC;
 }
 
+p, a, span {
+    font-size: 1.125em; /* SVARER TIL 18px --> 18 / 16 = 1.125 */
+}
+
+h3 {
+    font-size: 1.375em;
+}
+
 .display-font {
     font-family: "Playfair Display", serif;
     font-style: italic;
     font-weight: normal;
+}
+
+.container {
+    --max-width: 1440px;
+    --padding: 1em;
+    width: min( var(--max-width), 100% - (var(--padding) * 2));
+    margin-inline: auto;
+    /* https://youtu.be/Ch_LoWKLv3A?si=oB5MyHKEWbaSU2k4&t=517 */
 }
 
 /* HEADER */
@@ -28,12 +44,25 @@
 header {
     margin: 2em;
     padding: 2em;
-    align-content: center;
+    align-items: center;
     position: absolute;
     top: 0;
     width: calc(100% - 4em);
+    background-color: transparent;
     display: grid;
     grid-template-columns: 20% 60% 20%;
+    column-gap: 0;
+    z-index: 99;
+}
+
+header.sekundaer {
+    margin: 0;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: var(--off-white);
+    display: grid;
+    grid-template-columns: 30% 40% 30%;
     column-gap: 0;
 }
 
@@ -42,6 +71,10 @@ header .logo a {
     font-size: 1.8em;
     text-decoration: none;
     font-weight: bold;
+}
+
+header.sekundaer .logo a {
+    color: var(--font-black);
 }
 
 header .logo a:hover {
@@ -73,8 +106,25 @@ header nav ul li.active a {
     font-weight: bold;
 }
 
+header.sekundaer nav ul li a {
+    color: var(--font-black);
+    text-decoration: 0;
+}
+
+header.sekundaer nav ul li a:hover {
+    border-bottom: 1px solid var(--font-black);
+}
+
+header.sekundaer nav ul li.active a {
+    color: var(--font-black);
+    font-weight: bold;
+}
+
 header .header-ikoner {
     text-align: end;
+    display: flex;
+    align-items: center;
+    justify-content: end;
 }
 
 header .header-ikoner a {
@@ -88,28 +138,68 @@ header .header-ikoner svg {
     margin-left: 20px;
 }
 
+header.sekundaer .header-ikoner svg {
+    color: var(--font-black);
+}
+
 header .header-ikoner svg:hover {
     opacity: 0.8;
+}
+
+header.sekundaer fieldset {
+    display: inline;
+    border-radius: 100px;
+    border: 1px solid var(--font-black);
+}
+
+header.sekundaer fieldset input {
+    border: 0;
+    background-color: transparent;
+    font-size: 1em;
+    color: var(--font-black);
+}
+
+header.sekundaer fieldset input:focus {
+    outline: none;
+}
+
+header.sekundaer fieldset button {
+    border: 0;
+    background-color: transparent;
+    margin-top: 2px;
+}
+
+header.sekundaer fieldset button:hover {
+    cursor: pointer;
 }
 
 /* HERO M. BILLEDE */
 
 .hero {
-    min-height: 75vh;
+    height: 75vh;
     margin: 2em;
     border-radius: 25px;
     align-content: center;
     justify-items: center;
     color: var(--font-white);
     text-align: center;
+    overflow: hidden;
 }
 
-.hero.bg-img-1 {
-    background: url(/img/forside-hero.jpg) rgb(0,0,0,0.2);
-    background-blend-mode: overlay;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.hero.bg-video video {
+    height: 75vh;
+    margin: 2em;
+    border-radius: 25px;
+    position: absolute; /* VIDEOEN SKAL TRÆKKES UD AF FLOWET */
+    top: 0;
+    left: 0;
+    width: calc(100% - 4em);
+    object-fit: cover;
+    z-index: -1; /* VIDEOEN SKAL FLYTTES HELT TILBAGE SÅ TEKST, MV. ER ØVERST */
+}
+
+.hero.bg-overlay {
+    background: rgb(0,0,0,0.4);
 }
 
 .hero h1 {
@@ -120,23 +210,42 @@ header .header-ikoner svg:hover {
 
 .hero .searchbar {
     background-color: var(--bg-white);
-    min-width: 42vw;
     border: 0;
     border-radius: 50px;
     align-content: center;
     padding: 8px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr) 3.5em; /* GRID'ET DELES I 4 KOLONNER. DE TRE FØRSTE ER LIGE STORE OG DEN FJERDE (KNAP) ER FAST 3.5em BRED */
+    gap: 20px;
+    column-rule-width: 1px; /* STYLER KOLONNERNES GAP MED EN STREG */
+    column-rule-style: solid;
+    column-rule-color: var(--border-grey);
 }
 
 
 .hero .searchbar fieldset {
     display: inline-block;
     border: 0;
-    border-right: 1px solid var(--font-grey);
-    width: 30%;
+    width: 100%;
+    padding: 8px 12px;
+}
+
+.hero .searchbar fieldset:nth-child(1) {
+    border-radius: 30px 10px 10px 30px;
+    padding: 8px 8px 8px 24px;
+}
+
+.hero .searchbar fieldset:nth-child(2) {
+    border-radius: 10px;
 }
 
 .hero .searchbar fieldset:nth-child(3) {
     border: 0;
+    border-radius: 10px 30px 30px 10px;
+}
+
+.hero .searchbar fieldset:hover {
+    background-color: var(--font-lightgrey);
 }
 
 .hero .searchbar label {
@@ -149,6 +258,8 @@ header .header-ikoner svg:hover {
 .hero .searchbar input {
     border: 0;
     width: 100%;
+    background-color: transparent;
+    padding: 0;
 }
 
 .hero .searchbar input:focus {
@@ -157,7 +268,6 @@ header .header-ikoner svg:hover {
 
 
 .hero .searchbar button {
-    float: right;
     height: 4em;
     width: 4em;
     background-color: var(--accent-red);
@@ -167,7 +277,7 @@ header .header-ikoner svg:hover {
 }
 
 .hero .searchbar button:hover {
-    cursor: pointer;
+    cursor: pointer; /* <BUTTON> LAVER AUTOMATISK IKKE MUSEN TIL EN HÅND/POINTER */
 }
 
 /* POPULÆRE DESTINATIONER FORSIDE */
@@ -184,12 +294,17 @@ header .header-ikoner svg:hover {
 
 .poplaere-destinationer .card-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* LAVER GRID'ET I FIRE LIGE STORE DELE/KOLONNER */
     gap: 1.5em;
+
+    @media (max-width: 767px) { /* VED SKÆRME OP TIL (UNDER) 767px ER GRID'ET KUN ÉN DEL/KOLONNE BRED */
+        grid-template-columns: 1fr;
+    }
+    
 }
 
 .poplaere-destinationer .card-container .card {
-    background-color: var(--off-white);
+    background-color: var(--font-grey);
     aspect-ratio: 16/9;
     align-content: end;
     border-radius: 25px;
@@ -200,7 +315,14 @@ header .header-ikoner svg:hover {
 
 .poplaere-destinationer .card-container .card:hover {
     transform: translateY(-5px);
-    transition: ease-in-out 150ms;
+}
+
+.poplaere-destinationer .card.bg-djurs {
+    background: url(/img/populaer-djurs.png), linear-gradient(#00000000, #000000a0); /* GRADIENTEN ER TIL FOR IKKE AT TONE HELE BILLEDEN MEN KUN BUNDEN */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: overlay; /* LIGESOM VI KENDER BLENDMODE FRA PHOTOSHOP */
 }
 
 .poplaere-destinationer .card.bg-aarhus {
@@ -241,7 +363,7 @@ header .header-ikoner svg:hover {
     width: auto;
 }
 
-/* DESTINATIONER KATALOG */
+/* DESTINATIONER GENERELT (BENYTTES AS-IS PÅ FORSIDEN) LÆNGERE NEDE ER SPECIFIKKE STYLES TIL KATALOG SIDEN (F.EKS. TIL FILTRE) */
 
 .destinationer {
     margin: 2em;
@@ -257,6 +379,9 @@ header .header-ikoner svg:hover {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5em;
+    @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .destinationer .card .top {
@@ -270,11 +395,11 @@ header .header-ikoner svg:hover {
     object-fit: cover;
     object-position: center;
     margin-top: -3em;
-    transition: ease-in-out 300ms;
+    transition: ease-in-out 300ms; /* TRANSITION MELLEM NON-HOVER OG HOVER STATE. EASE-IN-OUT FOR "SMOOTH KEYFRAME KURVE" */
 }
 
 .destinationer .card img:hover {
-    transform: scale(108%);
+    transform: scale(108%); /* HOVER EFFEKTEN ER "ZOOM"/SKALERING AF BILLEDET MED 8% */
     transition: ease-in-out 300ms;
 }
 
@@ -289,7 +414,7 @@ header .header-ikoner svg:hover {
     border-radius: 50%;
     align-content: center;
     text-align: center;
-    z-index: 1;
+    z-index: 1; /* SØRGER FOR AT KNAPPEN MED FAVORIT IKONER (HJERTET) ALTID ER ØVERST OVEN PÅ BILLEDET */
 }
 
 .destinationer .card .favorit svg {
@@ -302,7 +427,7 @@ header .header-ikoner svg:hover {
 
 .destinationer .card .bottom {
     position: relative;
-    top: -4px;
+    top: -4px; /* FIKSER DET LILLE MELLEMRUM DER ER NEDENUNDER BILLEDERNE <IMG>-TAGGENE */
     background-color: var(--off-white);
     min-height: 8em;
     align-content: start;
@@ -332,8 +457,7 @@ header .header-ikoner svg:hover {
     display: inline-block;
     font-size: 1em;
 }
-
-.destinationer .card .anmeldelse-stjerner .stjerner {
+.stjerner {
     position: relative;
     bottom: -2px;
     display: inline-block;
@@ -341,14 +465,80 @@ header .header-ikoner svg:hover {
     margin-left: 5px;
 }
 
-.destinationer .card .anmeldelse-stjerner .stjerner svg.fuld-farve {
+.stjerner svg.fuld-farve {
     width: auto;
     color: var(--accent-yellow);
 }
 
-.destinationer .card .anmeldelse-stjerner .stjerner svg.ingen-farve {
+.stjerner svg.ingen-farve {
     width: auto;
     color: var(--border-grey);
+}
+
+/* DESTIONATIONER KATALOG (M. FILTER KOLONNE) */
+
+.destinationer.katalog .katalog-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr; /* DEN FØRSTE KOLONNE (FILTER CARDET) ER EN ANDEL BRED OG CARD-CONTAINEREN ER 4 ANDELE BRED = 1/5 + 4/5 = 20% + 80% */
+    gap: 1.5em;
+    @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.destinationer.destinationer.katalog h1 {
+    margin-bottom: 30px;
+    font-weight: 600;
+}
+
+.destinationer.katalog .filter-card {
+    background-color: var(--off-white);
+    border-radius: 25px;
+    padding: 1.8em;
+    max-height: 100vh;
+}
+
+.destinationer.katalog .filter-card h3 {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-grey);
+}
+
+.destinationer.katalog .filter-card fieldset {
+    padding: 0;
+    border-radius: 12px;
+    color: var(--font-black);
+    border: 0;
+    margin-bottom: 20px;
+}
+
+.destinationer.katalog .filter-card label {
+    display: block;
+    font-size: 0.9em;
+    color: var(--font-black);
+    margin-bottom: 8px;
+}
+
+.destinationer.katalog .filter-card input {
+    color: var(--font-black);
+    border: 1px solid var(--border-grey);
+    border-radius: 12px;
+    background-color: var(--bg-white);
+    padding: 12px 20px;
+    width: 100%;
+    font-size: 1em;
+}
+
+.destinationer.katalog .filter-card input::placeholder {
+    color: var(--font-grey);
+}
+
+.destinationer.katalog .filter-card button {
+    background-color: transparent;
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 100px;
+    border: 1px solid var(--border-grey);
 }
 
 
@@ -375,7 +565,7 @@ header .header-ikoner svg:hover {
 }
 
 .nyhedsbrev h4 {
-    text-transform: uppercase;
+    text-transform: uppercase; /* LAVER ALLE BOGSTAVERNE STORE (CAPS LOCK) UANSET HVORDAN DET ER TASTET/SKREVET I HTML */
     font-size: 1.1em;
     font-weight: 500;
     margin-bottom: 12px;
@@ -417,15 +607,6 @@ header .header-ikoner svg:hover {
     font-weight: 600;
 }
 
-/* ********************************* */
-/* SKRIV NOGET MERE STYLING LIGE HER */
-/* ********************************* */
-
-
-
-
-
-
 /* FOOTER */
 
 footer {
@@ -444,8 +625,11 @@ footer .footer-bg {
 .footer-columns {
     padding: 6em 2em;
     display: grid;
-    grid-template-columns: 30% repeat(3, 1fr);
+    grid-template-columns: 30% repeat(3, 1fr); /* FIRE KOLONNER DER ER HHV. 30% BRED OG 1/3 + 1/3 + 1/3 (DE SIDSTE ER TRE LIGE STORE DELE VIA. REPEAT FUNKTIONEN) */
     gap: 4em;
+    @media (max-width: 767px) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .footer-columns .column {
@@ -517,13 +701,23 @@ footer .footer-bg {
 
 .copyright-columns {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* TO LIGE STORE KOLONNER/DELE */
     padding: 1em 2em;
     color: var(--off-white);
+
+    @media (max-width: 767px) { /* VED SMÅ SKÆRME TIL OG MED 767PX ER DER KUN EN KOLONNE */
+        grid-template-columns: 1fr;
+        font-size: 0.9em;
+
+        .column > * { /* VÆLGER CHILD-ELEMENTERNE LIGE INDEN I .COLUMN OG IKKE GRANDCHILDS MV. - SØRGER FOR AT BEGGE TEKSTER I KOLONNERNE ER VENSTRE JUSTERET PÅ SMÅ SKÆRME */
+            text-align: start;
+            margin-bottom: 10px;
+        }
+    }
 }
 
-.copyright-columns .column:last-of-type {
-    text-align: end;
+.copyright-columns .column:last-of-type { /* VÆLGER DEN SIDSTE KOLONNE (DEN TIL HØJRE) */
+    text-align: end; 
     color: var(--font-grey);
 }
 
@@ -536,6 +730,321 @@ footer .footer-bg {
     border-bottom: 1px solid var(--off-white);
 }
 
-.copyright-columns .column span.seperator {
+.copyright-columns .column span.seperator { /* BRUGES TIL AT ØGE AFSTANDEN MELLEM TELEFONNUMMER OG MAIL. SPAN.SEPERATOR HAR INDEHOLDET "|" (VERTIKAL STREG = opt. + i PÅ MAC) */
     padding: 0 1em;
 }
+
+/* DESTIONATIONSSIDE */
+
+section.destination-top {
+    margin: 2em;
+    padding: 20px 0;
+}
+
+.destination-top .titel {
+    display: grid;
+    grid-template-columns: 4fr 1fr; /* DELER I TO KOLONNER SOM ER HHV. 4 ANDELE OG 1 ANDEL (4/5 + 1/5 = 80% + 20%) */
+    margin-bottom: 30px;
+}
+
+.destination-top h1 {
+    font-weight: 700;
+}
+
+.destination-top .titel .favoritter {
+    text-align: end;
+    color: var(--font-grey);
+}
+
+.destination-top .titel .favoritter a {
+    color: var(--font-grey);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: end;
+}
+
+.destination-top .titel .favoritter svg { 
+    height: 1.5em;
+    width: 1.5em;
+}
+
+.destination-top .billeder-columns {
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* DELER I TO KOLONNER I HHV. 3 ANDELE OG 1 ANDEL (3/4 + 1/4 = 75% + 25%) */
+    gap: 25px;
+}
+
+.destination-top .billeder-columns .column:last-of-type {
+    display: grid;
+    gap: 25px;
+}
+
+.destination-top .billeder-columns .column img {
+    width: 100%;
+    height: 100%;
+    border-radius: 25px;
+    aspect-ratio: 16/9;
+}
+
+.destination-top .billeder-columns .column .flere-billeder {
+    /* FICME: SKAL FIKSES TIL "POSITION: relative;" OG .knap NEDENFOR SKAL FIKSES MED "POSITION:absolute;" MED NY BOTTOM, LEFT ELLER RIGHT VÆRDI */
+}
+
+.destination-top .billeder-columns .column .flere-billeder .knap { /* FIXME: ^^^^^^^^^^^^^^ FIKS SOM OVENSTÅENDE ^^^^^^^^^^^^^^ */
+    text-align: center;
+    position: relative;
+    bottom: 130px;
+    left: 120px;
+    display: inline-block;
+    background-color: rgba(32, 35, 34, 0.7);
+    padding: 4px 12px;
+    border-radius: 9px;
+    color: var(--font-white);
+}
+
+.destination-top .billeder-columns .column .flere-billeder .knap a {
+    color: var(--font-white);
+    text-decoration: none
+}
+
+/* INFO SEKTION PÅ DESTIONATIONSSIDE */
+
+.destination-info {
+    padding: 60px 0;
+}
+
+.destination-info .info-columns {
+    display: grid;
+    grid-template-columns: 5fr 2fr; /* DELES I TO KOLONNER I HHV. 5 ANDELE OG 2 ANDELE (5/7 + 2/7 = CA. 71,4% + CA. 28,6%) */
+    gap: 25px;
+}
+
+.destination-info .info-titel * { /* VÆLGER ALT INDEN I .INFO-TITEL CLASSEN UANSET OM DET ER CHILD-, GRANDCHILD- ELLER GREATGRANDCHILD-ELEMTN */
+    display: inline; 
+}
+
+.destination-info .info-titel h2 {
+    margin-right: 30px;
+    font-weight: bold;
+}
+
+.destination-info .info-titel p:last-of-type {
+    margin: 5px;
+}
+
+.destination-info .column p.lang-tekst {
+    margin: 20px 0;
+    font-size: 1.125em;
+}
+
+.destination-info h2 {
+    font-weight: bold;
+    margin-top: 70px;
+    font-size: 2em;
+}
+
+.destination-info .ikoner-columns {
+    display: grid;
+    grid-template-columns: repeat(4, auto); /* LAVER FIRE LIGE STORE KOLONNER MED AUTO BREDDE. DVS. BREDDEN JUSTERES/TILPASSES AFHÆNGIGT AT INDHOLDETS BREDDE. SER VISUELT BEDRE UD END FAST BREDDE, SOM GIVER EVT. MEGET STORE VISUELLE GAPS */
+    gap: 25px;
+    margin: 20px 0 50px;
+} 
+
+.destination-info .ikoner-columns .column * {
+    display: inline
+}
+
+.destination-info .ikoner-columns .column {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.destination-info .ikoner-columns .column svg {
+    height: 1.8em;
+    width: 1.8em;
+}
+
+.destination-info .facilitet-knap {
+    background-color: var(--accent-green);
+    color: var(--font-white);
+    padding: 12px 40px;
+    border-radius: 300px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.destination-info .reserver {
+    background-color: var(--off-white);
+    padding: 35px 30px;
+    border-radius: 25px;
+}
+
+.destination-info .pris {
+    color: var(--accent-green);
+    text-align: end;
+}
+
+.destination-info .reserver form > * {
+    display: inline-block; /* LAVER CHILD-ELEMENTER I .RESERVER TIL INLINE-BLOCK ELEMENTER. PÅ DEN MÅDE KAN FIELDSETS/INPUTFELTER STÅ SIDE OM SIDE */
+}
+
+.destination-info .reserver fieldset {
+    background-color: transparent;
+    border: 1px solid var(--font-grey);
+    margin-bottom: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+.destination-info .reserver fieldset label {
+    font-size: 1em;
+    font-weight: 600;
+    display: block; /* LABELEN SKAL IKKE STÅ SIDE OM SIDE MED INPUTTET */
+}
+
+.destination-info .reserver fieldset input {
+    border: 0;
+    background-color: transparent;
+    width: 100%;
+    padding: 0;
+    font-size: 1em;
+}
+
+.destination-info .reserver fieldset.dato-felt {
+    width: 49.6%;
+}
+
+.destination-info .reserver button { /* FIXME: */
+    background-color: var(--accent-green);
+    color: var(--font-white);
+    padding: 12px 40px;
+    border-radius: 300px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 0;
+    font-size: 1.125em;
+    width: 50%;
+}
+
+.destination-info .kort {
+    margin-top: 30px;
+}
+
+.destination-info .kort .top svg {
+    height: 1.8em;
+    width: 1.8em;
+}
+
+.destination-info .kort .top {
+    padding: 20px 30px;
+    background-color: var(--off-white);
+    border-radius: 25px 25px 0 0;
+    display:flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.destination-info .kort .bottom iframe {
+    width: 100%;
+    min-height: 15em;
+    border-radius: 0 0 25px 25px;
+}
+
+.destination-info h3 {
+    display: inline; 
+    font-weight: bold;
+}
+
+.destination-info .titel {
+    display: flex; /* FLEXBOX */
+    justify-content: space-between; /* JUSTERER ELEMENTERNE HELT UDE I HVER SIN ENDE = KUN MULIGT MED FLEX */
+    margin-bottom: 20px;
+}
+
+
+/* DESTIONATIONSSIDE ANMELDELSER */
+
+.destination-anmeldelser .titel {
+    margin-bottom: 20px;
+}
+
+.destination-anmeldelser .titel h2 {
+    font-weight: bold;
+   /*  margin-top: 70px; */
+    font-size: 2em;
+    display: inline;
+    margin-right: 10px;
+}
+
+.destination-anmeldelser .titel a {
+    font-size: 1.5em;
+    color: var(--font-grey);
+}
+
+.destination-anmeldelser .anmeldelser-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 60px;
+}
+
+.destination-anmeldelser .anmeldelser-columns .column {
+    background-color: var(--off-white);
+    padding: 30px;
+    border-radius: 25px;
+}
+
+.destination-anmeldelser .top img {
+    height: 4em;
+    width: 4em;
+    object-fit: cover;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.destination-anmeldelser .top .info {
+    display: inline-block;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.destination-anmeldelser .top .info .stjerner p {
+    margin-left: 10px;
+    color: var(--font-grey);    
+}
+
+.destination-anmeldelser .top .info .stjerner > * {
+    display: inline;
+}
+
+.destination-anmeldelser .top .info .navn {
+    font-weight: 500;
+    font-size: 1.4em;
+}
+
+.destination-anmeldelser .top .info .dage {
+    color: var(--font-grey);
+}
+
+.destination-anmeldelser .overskrift {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.destination-anmeldelser .beskrivelse {
+    margin-bottom: 10px;
+}
+
+.destination-anmeldelser a.laes-mere {
+    color: var(--font-grey);
+    text-decoration: none;
+}
+
+.destinationer.oplevelser h2 {
+    font-size: 2em;
+    font-weight: 700;
+}
+
