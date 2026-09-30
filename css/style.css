@@ -82,6 +82,11 @@ header .logo a:hover {
     opacity: 0.8;
 }
 
+header .logo a img {
+    width: auto;
+    height: 1.8em;
+}
+
 header nav ul {
     text-align: center;
     margin: 0;
@@ -212,7 +217,7 @@ header fieldset button:hover {
 }
 
 .hero.bg-overlay {
-    background: rgb(0,0,0,0.4);
+    background: rgb(0,0,0,0.3);
 }
 
 .hero h1 {
@@ -402,7 +407,7 @@ header fieldset button:hover {
     border-radius: 25px 25px 0 0;
 }
 
-.destinationer .card img {
+.destinationer .card .top img {
     width: 100%;
     aspect-ratio: 16/9;
     object-fit: cover;
@@ -411,31 +416,44 @@ header fieldset button:hover {
     transition: ease-in-out 300ms; /* TRANSITION MELLEM NON-HOVER OG HOVER STATE. EASE-IN-OUT FOR "SMOOTH KEYFRAME KURVE" */
 }
 
-.destinationer .card img:hover {
+.destinationer .card .top:hover img {
     transform: scale(108%); /* HOVER EFFEKTEN ER "ZOOM"/SKALERING AF BILLEDET MED 8% */
     transition: ease-in-out 300ms;
 }
 
 .destinationer .card .favorit {
+    display: flex;
     position: relative;
     background-color: var(--bg-white);
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
     height: 3em;
     float: right;
     top: 25px;
     right: 25px;
     border-radius: 50%;
-    align-content: center;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
     z-index: 1; /* SØRGER FOR AT KNAPPEN MED FAVORIT IKONER (HJERTET) ALTID ER ØVERST OVEN PÅ BILLEDET */
 }
 
 .destinationer .card .favorit svg {
-    height: 1em;
-    width: auto;
+    height: 0.9em;
+    width: 1.1em;
     font-size: 1.5em;
-    margin-top: 6px;
-    color: var(--font-black);
+    fill: transparent;
+    stroke: var(--accent-green);
+    stroke-width: 1.5px;
+    stroke-linecap: round;
+    transition: 
+        stroke ease-in-out 150ms,
+        fill ease-in-out 150ms;
+}
+
+.destinationer .card .favorit:hover svg {
+    fill: var(--accent-green);
+    stroke: var(--accent-green);
+    stroke-width: 1.5px;
+    stroke-linecap: round;
 }
 
 .destinationer .card .bottom {
@@ -556,9 +574,9 @@ header fieldset button:hover {
 
 
 /* NYHEDSBREV */
-.nyhedsbrev {
+.nyhedsbrev .container {
+    margin: 3em auto 8em auto;
     min-height: 75vh;
-    margin: 3em 2em 8em 2em;
     border-radius: 25px;
     align-content: center;
     justify-items: center;
@@ -587,18 +605,23 @@ header fieldset button:hover {
 .nyhedsbrev fieldset {
     border: 1px solid var(--font-white);
     border-radius: 100px;
-    min-width: 45%;
+    width: 45%;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    margin: auto;
 }
 
 .nyhedsbrev fieldset input {
     background-color: transparent;
     color: var(--font-white);
     border: 0;
-    width: 80%;
+    display: inline;
+    padding: 8px 15px;
 }
 
 .nyhedsbrev fieldset input::placeholder {
     color: #e3e3e3;
+    font-size: 1.125em;
 }
 
 .nyhedsbrev fieldset input:focus {
@@ -606,12 +629,14 @@ header fieldset button:hover {
 }
 
 .nyhedsbrev fieldset button {
+    display: inline;
     background-color: transparent;
     color: var(--font-white);
     border: 0;
     border-left: 1px solid #fff;
     padding: 0.5em 1.5em;
     width: 10%;
+    font-size: 1.125em;
 }
 
 .nyhedsbrev fieldset button:hover {
@@ -658,6 +683,11 @@ footer .footer-bg {
 
 .footer-columns .logo a:hover {
     opacity: 0.8;
+}
+
+.footer-columns .logo a img {
+    width: auto;
+    height: 2em;
 }
 
 .footer-columns h3.slogan {
@@ -802,24 +832,25 @@ section.destination-top {
 }
 
 .destination-top .billeder-columns .column .flere-billeder {
-    /* FICME: SKAL FIKSES TIL "POSITION: relative;" OG .knap NEDENFOR SKAL FIKSES MED "POSITION:absolute;" MED NY BOTTOM, LEFT ELLER RIGHT VÆRDI */
+    position: relative;
 }
 
-.destination-top .billeder-columns .column .flere-billeder .knap { /* FIXME: ^^^^^^^^^^^^^^ FIKS SOM OVENSTÅENDE ^^^^^^^^^^^^^^ */
-    text-align: center;
-    position: relative;
-    bottom: 130px;
-    left: 120px;
+.destination-top .billeder-columns .column .flere-billeder .knap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    margin-top: -10px;
     display: inline-block;
     background-color: rgba(32, 35, 34, 0.7);
     padding: 4px 12px;
     border-radius: 9px;
     color: var(--font-white);
+    text-decoration: none
 }
 
-.destination-top .billeder-columns .column .flere-billeder .knap a {
-    color: var(--font-white);
-    text-decoration: none
+.destination-top .billeder-columns .column .flere-billeder .knap:hover {
+    text-decoration: underline;
 }
 
 /* INFO SEKTION PÅ DESTIONATIONSSIDE */
@@ -889,6 +920,10 @@ section.destination-top {
     font-weight: 600;
 }
 
+.destination-info .facilitet-knap:hover {
+    background-color: var(--font-black);
+}
+
 .destination-info .reserver {
     background-color: var(--off-white);
     padding: 35px 30px;
@@ -940,6 +975,11 @@ section.destination-top {
     border: 0;
     font-size: 1.125em;
     width: 50%;
+}
+
+.destination-info .reserver button:hover {
+    cursor: pointer;
+    background-color: var(--font-black);
 }
 
 .destination-info .kort {
